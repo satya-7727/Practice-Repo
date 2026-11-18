@@ -56,6 +56,16 @@
     "category_slider_CEyQxk": {
       "type": "category-slider",
       "blocks": {
+        "category_P3BVWG": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Gifting_Collection.png",
+            "image_url": "",
+            "title": "Collection",
+            "link": "",
+            "collection": ""
+          }
+        },
         "category_pbY6RW": {
           "type": "category",
           "settings": {
@@ -128,6 +138,7 @@
         }
       },
       "block_order": [
+        "category_P3BVWG",
         "category_pbY6RW",
         "category_e9JaUK",
         "category_dyApgR",
