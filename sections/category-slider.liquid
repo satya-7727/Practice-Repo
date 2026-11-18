@@ -5,10 +5,23 @@
         assign col = block.settings.collection
         assign img = block.settings.image | default: col.featured_image
         assign title = block.settings.title | default: col.title
-        assign link = block.settings.link | default: col.url
         assign img_url = block.settings.image_url | strip
+
+        assign raw_link = block.settings.link | default: col.url | strip
+        assign first_char = raw_link | slice: 0, 1
+        assign first_four = raw_link | slice: 0, 4
+
+        if raw_link == blank
+          assign final_link = '#'
+        elsif first_char == '/' or first_char == '#' or first_four == 'http' or first_four == 'mail' or first_four == 'tel:'
+          assign final_link = raw_link
+        elsif raw_link contains '.'
+          assign final_link = 'https://' | append: raw_link
+        else
+          assign final_link = '/' | append: raw_link
+        endif
       -%}
-      <a class="cat-slider__item" href="{{ link | default: '#' }}" {{ block.shopify_attributes }}>
+      <a class="cat-slider__item" href="{{ final_link }}" {{ block.shopify_attributes }}>
         <span class="cat-slider__circle">
           {%- if img != blank -%}
             {{ img | image_url: width: 400 | image_tag: loading: 'lazy', alt: title }}
@@ -51,12 +64,13 @@
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    padding: 10px 8px;
-    margin: -10px -8px;
+    padding: 12px 10px;
+    margin: -12px -10px;
   }
   .section-{{ section.id }} .cat-slider__track::-webkit-scrollbar { display: none; }
   .section-{{ section.id }} .cat-slider__item {
     flex: 0 0 calc((100% - (var(--items) - 1) * var(--gap)) / var(--items));
+    min-width: 0;
     scroll-snap-align: start;
     text-align: center;
     text-decoration: none;
@@ -78,12 +92,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
   }
   .section-{{ section.id }} .cat-slider__title {
     display: block;
-    width: 131px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 131px;
     margin: 12px auto 0;
     font-family: 'Mrs Eaves', 'Mrs Eaves Roman Small Caps', Baskerville, Georgia, serif;
     font-weight: 400;
@@ -101,23 +114,19 @@
 
   @media (hover: hover) {
     .section-{{ section.id }} .cat-slider__item:hover .cat-slider__circle {
-      transform: scale(1.06);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
-    }
-    .section-{{ section.id }} .cat-slider__item:hover .cat-slider__circle img {
-      transform: scale(1.1);
+      transform: scale(1.12);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
     }
     .section-{{ section.id }} .cat-slider__item:hover .cat-slider__title {
       opacity: 1;
     }
   }
   .section-{{ section.id }} .cat-slider__item:focus-visible .cat-slider__circle {
-    transform: scale(1.06);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+    transform: scale(1.12);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
   }
   @media (prefers-reduced-motion: reduce) {
-    .section-{{ section.id }} .cat-slider__circle,
-    .section-{{ section.id }} .cat-slider__circle img {
+    .section-{{ section.id }} .cat-slider__circle {
       transition: none;
     }
   }
@@ -162,10 +171,17 @@
   @media (max-width: 749px) {
     .section-{{ section.id }} {
       --items: {{ section.settings.items_mobile }};
-      --gap: 12px;
-      padding: 20px 12px;
+      --gap: 4px;
+      padding: 20px 10px;
     }
-    .section-{{ section.id }} .cat-slider__title { font-size: 14px; }
+    .section-{{ section.id }} .cat-slider__track {
+      padding: 0;
+      margin: 0;
+    }
+    .section-{{ section.id }} .cat-slider__title {
+      font-size: 14px;
+      margin-top: 4px;
+    }
     .section-{{ section.id }} .cat-slider__dots { display: none; }
     .section-{{ section.id }} .cat-slider__progress { display: block; }
   }
@@ -254,7 +270,7 @@
     {
       "type": "range",
       "id": "gap",
-      "label": "Gap between circles (px)",
+      "label": "Gap between circles on desktop (px)",
       "min": 8,
       "max": 40,
       "step": 2,
@@ -302,9 +318,10 @@
           "label": "Title"
         },
         {
-          "type": "url",
+          "type": "text",
           "id": "link",
-          "label": "Link"
+          "label": "Link",
+          "info": "Example: /collections/dry-fruits or https://example.com/page. Leave empty to use the collection below."
         },
         {
           "type": "collection",
