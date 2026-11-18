@@ -1,0 +1,331 @@
+<section class="cat-slider section-{{ section.id }}">
+  <div class="cat-slider__track" data-track>
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign col = block.settings.collection
+        assign img = block.settings.image | default: col.featured_image
+        assign title = block.settings.title | default: col.title
+        assign link = block.settings.link | default: col.url
+        assign img_url = block.settings.image_url | strip
+      -%}
+      <a class="cat-slider__item" href="{{ link | default: '#' }}" {{ block.shopify_attributes }}>
+        <span class="cat-slider__circle">
+          {%- if img != blank -%}
+            {{ img | image_url: width: 400 | image_tag: loading: 'lazy', alt: title }}
+          {%- elsif img_url != blank -%}
+            <img src="{{ img_url }}" alt="{{ title | escape }}" width="400" height="400" loading="lazy">
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'cat-slider__placeholder' }}
+          {%- endif -%}
+        </span>
+        <span class="cat-slider__title">{{ title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  <div class="cat-slider__dots" data-dots></div>
+  <div class="cat-slider__progress" data-progress><span data-progress-bar></span></div>
+</section>
+
+{% style %}
+  @font-face {
+    font-family: 'Mrs Eaves';
+    src: url('{{ 'MrsEaves-RomanSmallCaps.woff2' | asset_url }}') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .section-{{ section.id }} {
+    --items: {{ section.settings.items_desktop }};
+    --gap: {{ section.settings.gap }}px;
+    --accent: {{ section.settings.accent_color }};
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: 30px 20px;
+  }
+  .section-{{ section.id }} .cat-slider__track {
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 8px;
+    margin: -10px -8px;
+  }
+  .section-{{ section.id }} .cat-slider__track::-webkit-scrollbar { display: none; }
+  .section-{{ section.id }} .cat-slider__item {
+    flex: 0 0 calc((100% - (var(--items) - 1) * var(--gap)) / var(--items));
+    scroll-snap-align: start;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .section-{{ section.id }} .cat-slider__circle {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f6e3d3;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .section-{{ section.id }} .cat-slider__circle img,
+  .section-{{ section.id }} .cat-slider__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .section-{{ section.id }} .cat-slider__title {
+    display: block;
+    width: 131px;
+    max-width: 100%;
+    margin: 12px auto 0;
+    font-family: 'Mrs Eaves', 'Mrs Eaves Roman Small Caps', Baskerville, Georgia, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: small-caps;
+    font-size: 18px;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: capitalize;
+    color: {{ section.settings.text_color }};
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+
+  @media (hover: hover) {
+    .section-{{ section.id }} .cat-slider__item:hover .cat-slider__circle {
+      transform: scale(1.06);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+    }
+    .section-{{ section.id }} .cat-slider__item:hover .cat-slider__circle img {
+      transform: scale(1.1);
+    }
+    .section-{{ section.id }} .cat-slider__item:hover .cat-slider__title {
+      opacity: 1;
+    }
+  }
+  .section-{{ section.id }} .cat-slider__item:focus-visible .cat-slider__circle {
+    transform: scale(1.06);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .section-{{ section.id }} .cat-slider__circle,
+    .section-{{ section.id }} .cat-slider__circle img {
+      transition: none;
+    }
+  }
+
+  .section-{{ section.id }} .cat-slider__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+  }
+  .section-{{ section.id }} .cat-slider__dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: #ddd;
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease;
+  }
+  .section-{{ section.id }} .cat-slider__dot.is-active {
+    width: 28px;
+    background: var(--accent);
+  }
+  .section-{{ section.id }} .cat-slider__progress {
+    display: none;
+    height: 4px;
+    margin-top: 20px;
+    background: #ddd;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .section-{{ section.id }} .cat-slider__progress span {
+    display: block;
+    height: 100%;
+    width: 30%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: transform 0.1s linear;
+  }
+  @media (max-width: 749px) {
+    .section-{{ section.id }} {
+      --items: {{ section.settings.items_mobile }};
+      --gap: 12px;
+      padding: 20px 12px;
+    }
+    .section-{{ section.id }} .cat-slider__title { font-size: 14px; }
+    .section-{{ section.id }} .cat-slider__dots { display: none; }
+    .section-{{ section.id }} .cat-slider__progress { display: block; }
+  }
+{% endstyle %}
+
+<script>
+  (function () {
+    var root = document.querySelector('.section-{{ section.id }}');
+    if (!root) return;
+    var track = root.querySelector('[data-track]');
+    var dotsWrap = root.querySelector('[data-dots]');
+    var progress = root.querySelector('[data-progress]');
+    var bar = root.querySelector('[data-progress-bar]');
+    var pages = 1;
+
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      var ratio = max > 0 ? track.scrollLeft / max : 0;
+
+      var dots = dotsWrap.children;
+      var active = Math.round(ratio * (pages - 1));
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].classList.toggle('is-active', i === active);
+      }
+
+      if (bar) {
+        var w = (track.clientWidth / track.scrollWidth) * 100;
+        if (w > 100) w = 100;
+        bar.style.width = w + '%';
+        bar.style.transform = 'translateX(' + (w > 0 ? (ratio * (100 - w) / w) * 100 : 0) + '%)';
+        progress.style.visibility = max > 2 ? 'visible' : 'hidden';
+      }
+    }
+
+    function build() {
+      var max = track.scrollWidth - track.clientWidth;
+      pages = max > 2 ? Math.ceil(track.scrollWidth / track.clientWidth) : 1;
+      dotsWrap.innerHTML = '';
+      if (pages > 1) {
+        for (var i = 0; i < pages; i++) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'cat-slider__dot';
+          dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          (function (index) {
+            dot.addEventListener('click', function () {
+              track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+            });
+          })(i);
+          dotsWrap.appendChild(dot);
+        }
+      }
+      update();
+    }
+
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', build);
+    build();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Category slider",
+  "tag": "section",
+  "class": "category-slider",
+  "settings": [
+    {
+      "type": "range",
+      "id": "items_desktop",
+      "label": "Circles per row (desktop)",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "items_mobile",
+      "label": "Circles per row (mobile)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between circles (px)",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fff8e8"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#231F20"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Dots / progress bar color",
+      "default": "#0f8f7e"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Upload a square image (for example 800 x 800 px)."
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Image URL (optional)",
+          "info": "Only used if no image is uploaded above. Paste a full link starting with https://"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection (optional)",
+          "info": "If chosen, its image, title and link are used for anything left empty."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category slider",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Category 1" } },
+        { "type": "category", "settings": { "title": "Category 2" } },
+        { "type": "category", "settings": { "title": "Category 3" } },
+        { "type": "category", "settings": { "title": "Category 4" } },
+        { "type": "category", "settings": { "title": "Category 5" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
