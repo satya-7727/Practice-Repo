@@ -61,7 +61,7 @@
           "settings": {
             "image": "shopify://shop_images/steel-water-bottle.png",
             "image_url": "",
-            "title": "UTILS",
+            "title": "Utils",
             "link": "",
             "collection": ""
           }
@@ -71,7 +71,7 @@
           "settings": {
             "image": "shopify://shop_images/Seabuckthron.png",
             "image_url": "",
-            "title": "SEABUCKTHRON",
+            "title": "Seabuckthron",
             "link": "",
             "collection": ""
           }
@@ -81,7 +81,7 @@
           "settings": {
             "image": "shopify://shop_images/Gifting_Collection_2.png",
             "image_url": "",
-            "title": "GIFTS",
+            "title": "Gifts",
             "link": "",
             "collection": ""
           }
@@ -91,7 +91,7 @@
           "settings": {
             "image": "shopify://shop_images/Dry_Fruits.png",
             "image_url": "",
-            "title": "DRY FRUITS",
+            "title": "Dry Fruits",
             "link": "",
             "collection": ""
           }
@@ -101,7 +101,7 @@
           "settings": {
             "image": "shopify://shop_images/Pahadi_Wellness.png",
             "image_url": "",
-            "title": "PAHADI WELLNESS",
+            "title": "Pahadi Wellness",
             "link": "",
             "collection": ""
           }
@@ -111,7 +111,7 @@
           "settings": {
             "image": "shopify://shop_images/Pure_Ghee.png",
             "image_url": "",
-            "title": "PURE GHEE",
+            "title": "Pure Ghee",
             "link": "",
             "collection": ""
           }
@@ -121,7 +121,7 @@
           "settings": {
             "image": "shopify://shop_images/Gifting_Collection.png",
             "image_url": "",
-            "title": "GIFTING COLLECTION",
+            "title": "Gifting Collection",
             "link": "",
             "collection": ""
           }
@@ -142,7 +142,7 @@
         "items_mobile": 4,
         "gap": 20,
         "background_color": "#fff8e8",
-        "text_color": "#231F20",
+        "text_color": "#231f20",
         "accent_color": "#0f8f7e"
       }
     }
