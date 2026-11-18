@@ -39,6 +39,110 @@
         "show_text_below": false
       }
     },
+    "category_slider_CEyQxk": {
+      "type": "category-slider",
+      "blocks": {
+        "category_P3BVWG": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Gifting_Collection.png",
+            "image_url": "",
+            "title": "Collection",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_pbY6RW": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/steel-water-bottle.png",
+            "image_url": "",
+            "title": "Utils",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_e9JaUK": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Seabuckthron.png",
+            "image_url": "",
+            "title": "Seabuckthron",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_dyApgR": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Gifting_Collection_2.png",
+            "image_url": "",
+            "title": "Gifts",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_63z6HR": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Dry_Fruits.png",
+            "image_url": "",
+            "title": "Dry Fruits",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_zLNkad": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Pahadi_Wellness.png",
+            "image_url": "",
+            "title": "Pahadi Wellness",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_UndbYX": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Pure_Ghee.png",
+            "image_url": "",
+            "title": "Pure Ghee",
+            "link": "",
+            "collection": ""
+          }
+        },
+        "category_RUdarK": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Gifting_Collection.png",
+            "image_url": "",
+            "title": "Gifting Collection",
+            "link": "",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_P3BVWG",
+        "category_pbY6RW",
+        "category_e9JaUK",
+        "category_dyApgR",
+        "category_63z6HR",
+        "category_zLNkad",
+        "category_UndbYX",
+        "category_RUdarK"
+      ],
+      "name": "Category slider",
+      "settings": {
+        "items_desktop": 7,
+        "items_mobile": 4,
+        "gap": 20,
+        "background_color": "#fff8e8",
+        "text_color": "#231f20",
+        "accent_color": "#0f8f7e"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
