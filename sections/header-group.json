@@ -3,27 +3,6 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "header": {
-      "type": "header",
-      "settings": {
-        "mobile_logo_position": "center",
-        "menu": "main-menu",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "search_placeholder": "Search for gift",
-        "wishlist_url": "",
-        "highlight_title": "Best Sellers",
-        "highlight_bg": "#0b8a6f",
-        "highlight_text": "#ffffff",
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
-    },
     "custom_announcement_fcdrQj": {
       "type": "custom-announcement",
       "blocks": {
@@ -47,6 +26,27 @@
         "track_url": "",
         "btn_bg": "#f5e6b8",
         "btn_text": "#1a1a1a"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "mobile_logo_position": "left",
+        "menu": "main-menu",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "search_placeholder": "Search for gift",
+        "wishlist_url": "",
+        "highlight_title": "Best Sellers",
+        "highlight_bg": "#0b8a6f",
+        "highlight_text": "#ffffff",
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     }
   },
