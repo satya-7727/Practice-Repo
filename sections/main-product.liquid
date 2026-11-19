@@ -16,18 +16,40 @@
 
       <!-- PRODUCT BADGES FROM TAGS -->
       {% if section.settings.show_badges %}
-        <div class="product-badges">
+  <div class="product-badges">
 
-          {% for tag in product.tags %}
-            {% if tag contains 'badge:' %}
-              <span class="product-badge">
-                {{ tag | remove: 'badge:' | strip }}
-              </span>
-            {% endif %}
-          {% endfor %}
+    {% for tag in product.tags %}
+      {% if tag contains 'badge:' %}
+        {% assign badge_name = tag | remove: 'badge:' | strip | downcase %}
 
-        </div>
+        <span class="product-badge"
+          {% if badge_name == 'new' %}
+            style="background-color: #dbeafe; color: #1d4ed8;"
+
+          {% elsif badge_name == 'sale' %}
+            style="background-color: #fee2e2; color: #dc2626;"
+
+          {% elsif badge_name == 'bestseller' %}
+            style="background-color: #fef3c7; color: #92400e;"
+
+          {% elsif badge_name == 'trending' %}
+            style="background-color: #f3e8ff; color: #7e22ce;"
+
+          {% elsif badge_name == 'premium' %}
+            style="background-color: #dcfce7; color: #166534;"
+
+          {% else %}
+            style="background-color: #e5e7eb; color: #374151;"
+          {% endif %}
+        >
+          {{ badge_name | escape }}
+        </span>
+
       {% endif %}
+    {% endfor %}
+
+  </div>
+{% endif %}
 
       <!-- PRODUCT TITLE -->
       <h1 class="product-title">
