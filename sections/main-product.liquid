@@ -14,43 +14,38 @@
     <!-- LEFT COLUMN: PRODUCT INFORMATION -->
     <div class="main-product-info">
 
-<!-- PRODUCT BADGES FROM TAGS -->
-
-{% if product.tags.size > 0 %}
+      <!-- PRODUCT BADGES FROM TAGS -->
+      {% if section.settings.show_badges %}
   <div class="product-badges">
 
     {% assign badge_index = 0 %}
 
-    {% for tag in product.tags %}
+{% for tag in product.tags %}
 
-      {% assign badge_name = tag | strip %}
-      {% assign color_index = badge_index | modulo: 5 %}
+    {% assign badge_name = tag | strip %}
 
-      <span class="product-badge"
-        {% case color_index %}
-          {% when 0 %}
-            style="background: #dbeafe; color: #1d4ed8;"
-          {% when 1 %}
-            style="background: #fee2e2; color: #dc2626;"
-          {% when 2 %}
-            style="background: #fef3c7; color: #92400e;"
-          {% when 3 %}
-            style="background: #f3e8ff; color: #7e22ce;"
-          {% when 4 %}
-            style="background: #dcfce7; color: #166534;"
-        {% endcase %}
-      >
-        {{ badge_name | escape }}
-      </span>
+    <span class="product-badge"
+      {% case badge_index | modulo: 5 %}
+        {% when 0 %}
+          style="background: #dbeafe; color: #1d4ed8;"
+        {% when 1 %}
+          style="background: #fee2e2; color: #dc2626;"
+        {% when 2 %}
+          style="background: #fef3c7; color: #92400e;"
+        {% when 3 %}
+          style="background: #f3e8ff; color: #7e22ce;"
+        {% when 4 %}
+          style="background: #dcfce7; color: #166534;"
+      {% endcase %}
+    >
+      {{ badge_name | escape }}
+    </span>
 
-      {% assign badge_index = badge_index | plus: 1 %}
-
-    {% endfor %}
+    {% assign badge_index = badge_index | plus: 1 %}
+{% endfor %}
 
   </div>
 {% endif %}
-  </div>
-
 
       <!-- PRODUCT TITLE -->
       <h1 class="product-title">
@@ -1284,7 +1279,6 @@
     }
 
   }
-
 
 </style>
 
