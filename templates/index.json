@@ -180,22 +180,22 @@
         "padding_bottom": 36
       }
     },
-    "marquee_bar_kBd9bF": {
+    "marquee_bar_PBYRap": {
       "type": "marquee-bar",
       "blocks": {
-        "item_JWkjck": {
+        "item_KdiKnt": {
           "type": "item",
           "settings": {
             "text": "Kashmir's Saffron"
           }
         },
-        "item_LepXCE": {
+        "item_h6zJ9p": {
           "type": "item",
           "settings": {
             "text": "Himalaya's Shilajit"
           }
         },
-        "item_X7rmga": {
+        "item_NY7mrW": {
           "type": "item",
           "settings": {
             "text": "Ladakh's Seabuckthorn"
@@ -203,9 +203,9 @@
         }
       },
       "block_order": [
-        "item_JWkjck",
-        "item_LepXCE",
-        "item_X7rmga"
+        "item_KdiKnt",
+        "item_h6zJ9p",
+        "item_NY7mrW"
       ],
       "name": "Scrolling text bar",
       "settings": {
@@ -217,8 +217,8 @@
   },
   "order": [
     "image_banner",
+    "marquee_bar_PBYRap",
     "category_slider_CEyQxk",
-    "featured_collection",
-    "marquee_bar_kBd9bF"
+    "featured_collection"
   ]
 }
