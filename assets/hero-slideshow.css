@@ -1,0 +1,106 @@
+.hero { position: relative; width: 100%; }
+
+.hero__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.hero__track::-webkit-scrollbar { display: none; }
+
+.hero__slide {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  height: var(--hero-h);
+  color: var(--text-color);
+}
+.hero__slide picture,
+.hero__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--overlay));
+  pointer-events: none;
+}
+
+.hero__content {
+  position: absolute;
+  z-index: 1;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 620px;
+}
+
+/* Heading: free alternative to Mrs Eaves Roman Small Caps */
+.hero__heading {
+  font-family: 'Cormorant SC', Georgia, serif;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: 0;
+  margin: 0 0 24px;
+}
+
+/* Paragraph: Archivo Regular 24px / 150% */
+.hero__text {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  margin: 0 0 32px;
+}
+
+.hero__button {
+  display: inline-block;
+  padding: 14px 28px;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  text-decoration: none;
+}
+
+.hero__dots {
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: width 0.3s;
+}
+.hero__dot.is-active { width: 36px; background: #fff; }
+
+@media (max-width: 749px) {
+  .hero__slide { height: var(--hero-h-m); }
+  .hero__content {
+    top: 24px;
+    transform: none;
+    left: 5%;
+    right: 5%;
+    max-width: none;
+  }
+  .hero__heading { font-size: 32px; margin-bottom: 12px; }
+  .hero__text { font-size: 16px; margin-bottom: 20px; }
+  .hero__button { padding: 12px 24px; font-size: 15px; }
+}
