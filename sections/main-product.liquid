@@ -2,7 +2,7 @@
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
   assign product_form_id = 'MainProductForm-' | append: section.id
-  assign reviews = product.metafields.custom.product_reviews.value
+  assign reviews = product.metafields.custom.reviews.value
   assign ingredients = product.metafields.custom.ingredients.value
   assign additional_info = product.metafields.custom.additional_information.value
 %}
