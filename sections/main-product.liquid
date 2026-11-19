@@ -263,9 +263,9 @@
         >
 
         <!-- NOTICE -->
-        {% if section.settings.show_product_notice %}
+        {% if product.metafields.custom.notice!=blank %}
           <div class="product-notice">
-            {{ section.settings.product_notice }}
+            {{ product.metafields.custom.notice.value }}
           </div>
         {% endif %}
 
@@ -1562,18 +1562,7 @@
       "label": "Variant heading",
       "default": "Select Pack"
     },
-    {
-      "type": "checkbox",
-      "id": "show_product_notice",
-      "label": "Show product notice",
-      "default": true
-    },
-    {
-      "type": "richtext",
-      "id": "product_notice",
-      "label": "Product notice",
-      "default": "<p>Not recommended for pregnant or breastfeeding women, individuals with low blood pressure, or those with a vitamin C allergy or vitamin K deficiency.</p>"
-    },
+
     {
       "type": "text",
       "id": "add_to_cart_text",
