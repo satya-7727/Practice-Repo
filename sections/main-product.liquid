@@ -21,9 +21,8 @@
     {% assign badge_index = 0 %}
 
 {% for tag in product.tags %}
-  {% if tag contains 'badge:' %}
 
-    {% assign badge_name = tag | remove: 'badge:' | strip %}
+    {% assign badge_name = tag | strip %}
 
     <span class="product-badge"
       {% case badge_index | modulo: 5 %}
@@ -43,8 +42,6 @@
     </span>
 
     {% assign badge_index = badge_index | plus: 1 %}
-
-  {% endif %}
 {% endfor %}
 
   </div>
