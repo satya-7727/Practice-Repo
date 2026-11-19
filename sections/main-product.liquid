@@ -23,7 +23,7 @@
 
     {% for tag in product.tags %}
 
-      {% if tag contains 'badge:' %}
+      
 
         {% assign badge_name = tag | remove: 'badge:' | strip %}
         {% assign color_index = badge_index | modulo: 5 %}
@@ -34,7 +34,7 @@
 
         {% assign badge_index = badge_index | plus: 1 %}
 
-      {% endif %}
+      
 
     {% endfor %}
 
@@ -670,7 +670,35 @@
   }
 
   /* BADGES */
+   /* Color 1 - Blue */
+#MainProduct-{{ section.id }} .badge-color-0 {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
 
+/* Color 2 - Red */
+#MainProduct-{{ section.id }} .badge-color-1 {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Color 3 - Yellow */
+#MainProduct-{{ section.id }} .badge-color-2 {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Color 4 - Purple */
+#MainProduct-{{ section.id }} .badge-color-3 {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+/* Color 5 - Green */
+#MainProduct-{{ section.id }} .badge-color-4 {
+  background: #dcfce7;
+  color: #166534;
+}
 
 
 
@@ -708,35 +736,7 @@
   border-radius: 20px;
 }
 
-/* Color 1 - Blue */
-#MainProduct-{{ section.id }} .badge-color-0 {
-  background: #dbeafe;
-  color: #1d4ed8;
-}
 
-/* Color 2 - Red */
-#MainProduct-{{ section.id }} .badge-color-1 {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-/* Color 3 - Yellow */
-#MainProduct-{{ section.id }} .badge-color-2 {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-/* Color 4 - Purple */
-#MainProduct-{{ section.id }} .badge-color-3 {
-  background: #f3e8ff;
-  color: #7e22ce;
-}
-
-/* Color 5 - Green */
-#MainProduct-{{ section.id }} .badge-color-4 {
-  background: #dcfce7;
-  color: #166534;
-}
 
   /* TITLE */
 
