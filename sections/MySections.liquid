@@ -1,0 +1,58 @@
+<div class="custom-section">
+<h1>{{section.settings.name}}</h1>
+<p>{{section.settings.designation}}</p>
+</div>
+
+<style>
+  .custom-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    text-align: center;
+    background-color: #f4f6f8;
+    border-radius: 12px;
+  }
+
+  .custom-section h1 {
+    margin: 0 0 8px;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .custom-section p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #4b5563;
+  }
+</style>
+
+{%schema%}
+{
+  "name":"Custom Section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings":[
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Satya prakash yadav"
+    },
+    {
+      "type": "textarea",
+      "id": "designation",
+      "label": "Designation",
+      "default": "Web developer associte"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Section"
+    }
+  ]
+}
+{%endschema%}
