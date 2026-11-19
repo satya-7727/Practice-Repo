@@ -1,0 +1,165 @@
+<style>
+  #PAB-{{ section.id }} {
+    background: {{ section.settings.bg }};
+    color: {{ section.settings.text_color }};
+    font-family: 'Archivo', sans-serif;
+  }
+  #PAB-{{ section.id }} .pab-inner {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 40px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #PAB-{{ section.id }} .pab-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  #PAB-{{ section.id }} .pab-arrow {
+    background: none;
+    border: 0;
+    padding: 4px;
+    cursor: pointer;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+  }
+  #PAB-{{ section.id }} .pab-msgs { text-align: center; }
+  #PAB-{{ section.id }} .pab-msg {
+    display: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: inherit;
+    text-decoration: none;
+  }
+  #PAB-{{ section.id }} .pab-msg.is-active { display: block; }
+  #PAB-{{ section.id }} .pab-msg strong { font-weight: 700; }
+
+  #PAB-{{ section.id }} .pab-track {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: {{ section.settings.btn_bg }};
+    color: {{ section.settings.btn_text }};
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 749px) {
+    #PAB-{{ section.id }} .pab-inner { padding: 10px 12px; }
+    #PAB-{{ section.id }} .pab-arrow { display: none; }
+    #PAB-{{ section.id }} .pab-track { display: none; }
+    #PAB-{{ section.id }} .pab-msg { font-size: 15px; }
+  }
+</style>
+
+<div id="PAB-{{ section.id }}" data-speed="{{ section.settings.speed | times: 1000 }}">
+  <div class="pab-inner">
+    <div class="pab-slider">
+      {%- if section.blocks.size > 1 -%}
+        <button type="button" class="pab-arrow pab-prev" aria-label="Previous">
+          <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 1L1.5 6l5 5"/></svg>
+        </button>
+      {%- endif -%}
+
+      <div class="pab-msgs">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="pab-msg" {{ block.shopify_attributes }}>{{ block.settings.text }}</a>
+          {%- else -%}
+            <span class="pab-msg" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <button type="button" class="pab-arrow pab-next" aria-label="Next">
+          <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 1l5 5-5 5"/></svg>
+        </button>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.track_label != blank -%}
+      <a href="{{ section.settings.track_url | default: '#' }}" class="pab-track">
+        <svg width="16" height="12" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1h14v11H1zM15 5h5l3 4v3h-8z"/><circle cx="6" cy="14" r="2"/><circle cx="18" cy="14" r="2"/></svg>
+        {{ section.settings.track_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('PAB-{{ section.id }}');
+    if (!root) return;
+    var msgs = root.querySelectorAll('.pab-msg');
+    var n = msgs.length, i = 0, timer;
+    if (!n) return;
+
+    function show(k) {
+      i = (k + n) % n;
+      msgs.forEach(function (m, j) { m.classList.toggle('is-active', j === i); });
+    }
+    function start() {
+      clearInterval(timer);
+      if (n > 1 && +root.dataset.speed > 0) {
+        timer = setInterval(function () { show(i + 1); }, +root.dataset.speed);
+      }
+    }
+
+    show(0);
+    var prev = root.querySelector('.pab-prev');
+    var next = root.querySelector('.pab-next');
+    if (prev) prev.addEventListener('click', function () { show(i - 1); start(); });
+    if (next) next.addEventListener('click', function () { show(i + 1); start(); });
+    start();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Custom announcement bar",
+  "settings": [
+    { "type": "color", "id": "bg", "label": "Background color", "default": "#0b8a6f" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
+    { "type": "range", "id": "speed", "label": "Seconds per message (0 = no auto-rotate)", "min": 0, "max": 10, "step": 1, "default": 5 },
+    { "type": "header", "content": "Track order button (desktop only)" },
+    { "type": "text", "id": "track_label", "label": "Button label (empty = hide)", "default": "Track Your Order" },
+    { "type": "url", "id": "track_url", "label": "Button link" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#f5e6b8" },
+    { "type": "color", "id": "btn_text", "label": "Button text color", "default": "#1a1a1a" }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Additional 10% off On your first Order" },
+        { "type": "url", "id": "link", "label": "Link (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Custom announcement bar",
+      "blocks": [{ "type": "message" }]
+    }
+  ]
+}
+{% endschema %}

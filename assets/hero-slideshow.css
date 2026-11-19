@@ -15,8 +15,14 @@
   height: var(--hero-h);
   color: var(--text-color);
 }
-.hero__slide picture,
+.hero__slide picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
 .hero__slide img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
