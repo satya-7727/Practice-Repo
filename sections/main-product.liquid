@@ -15,19 +15,31 @@
     <div class="main-product-info">
 
       <!-- PRODUCT BADGES FROM TAGS -->
-      {% if section.settings.show_badges %}
-        <div class="product-badges">
 
-          {% for tag in product.tags %}
-            {% if tag contains 'badge:' %}
-              <span class="product-badge">
-                {{ tag | remove: 'badge:' | strip }}
-              </span>
-            {% endif %}
-          {% endfor %}
+{% if section.settings.show_badges %}
+  <div class="product-badges">
 
-        </div>
+    {% assign badge_index = 0 %}
+
+    {% for tag in product.tags %}
+
+      {% if tag contains 'badge:' %}
+
+        {% assign badge_name = tag | remove: 'badge:' | strip %}
+        {% assign color_index = badge_index | modulo: 5 %}
+
+        <span class="product-badge badge-color-{{ color_index }}">
+          {{ badge_name | escape }}
+        </span>
+
+        {% assign badge_index = badge_index | plus: 1 %}
+
       {% endif %}
+
+    {% endfor %}
+
+  </div>
+{% endif %}
 
       <!-- PRODUCT TITLE -->
       <h1 class="product-title">
@@ -659,6 +671,9 @@
 
   /* BADGES */
 
+
+
+
   #MainProduct-{{ section.id }} .product-badges {
     display: flex;
     flex-wrap: wrap;
@@ -674,6 +689,54 @@
     font-size: 11px;
     border-radius: 4px;
   }
+
+
+  /* PRODUCT BADGES */
+
+#MainProduct-{{ section.id }} .product-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+#MainProduct-{{ section.id }} .product-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+/* Color 1 - Blue */
+#MainProduct-{{ section.id }} .badge-color-0 {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Color 2 - Red */
+#MainProduct-{{ section.id }} .badge-color-1 {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Color 3 - Yellow */
+#MainProduct-{{ section.id }} .badge-color-2 {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Color 4 - Purple */
+#MainProduct-{{ section.id }} .badge-color-3 {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+/* Color 5 - Green */
+#MainProduct-{{ section.id }} .badge-color-4 {
+  background: #dcfce7;
+  color: #166534;
+}
 
   /* TITLE */
 
