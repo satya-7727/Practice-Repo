@@ -30,39 +30,111 @@
       tabindex="-1"
     >
       {%- if cart == empty -%}
-        <div class="drawer__inner-empty">
-          <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
-            <div class="cart-drawer__empty-content">
-              <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
-              <button
-                class="drawer__close"
-                type="button"
-                onclick="this.closest('cart-drawer').close()"
-                aria-label="{{ 'accessibility.close' | t }}"
-              >
-                <span class="svg-wrapper">
-                  {{- 'icon-close.svg' | inline_asset_content -}}
-                </span>
-              </button>
-              <a href="{{ routes.all_products_collection_url }}" class="button">
-                {{ 'general.continue_shopping' | t }}
-              </a>
+  <div class="drawer__inner-empty">
+    <div class="cart-drawer__warnings center">
 
-              {%- if shop.customer_accounts_enabled and customer == null -%}
-                <p class="cart__login-title h3">{{ 'sections.cart.login.title' | t }}</p>
-                <p class="cart__login-paragraph">
-                  {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
-                </p>
-              {%- endif -%}
-            </div>
-          </div>
-          {%- if settings.cart_drawer_collection != blank -%}
-            <div class="cart-drawer__collection">
-              {% render 'card-collection', card_collection: settings.cart_drawer_collection, columns: 1 %}
-            </div>
-          {%- endif -%}
+      <div class="cart-drawer__empty-content">
+
+        <!-- Empty Cart Illustration -->
+        <div class="cart-empty-illustration">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 180 150"
+            width="180"
+            height="150"
+          >
+            <!-- Shadow -->
+            <ellipse
+              cx="90"
+              cy="125"
+              rx="65"
+              ry="10"
+              fill="#eeeeee"
+            />
+
+            <!-- Box body -->
+            <path
+              d="M40 55 L140 55 L130 115 L50 115 Z"
+              fill="#9db5b0"
+            />
+
+            <!-- Left side -->
+            <path
+              d="M40 55 L75 55 L65 75 L30 75 Z"
+              fill="#168f80"
+            />
+
+            <!-- Box front -->
+            <path
+              d="M75 55 L140 55 L130 115 L75 115 Z"
+              fill="#8ba9a3"
+            />
+
+            <!-- Box darker side -->
+            <path
+              d="M75 55 L75 115 L50 115 L50 75 L65 75 Z"
+              fill="#168f80"
+            />
+
+            <!-- Top flaps -->
+            <path
+              d="M40 55 L60 25 L105 25 L125 55 Z"
+              fill="#b9cbc7"
+            />
+
+            <path
+              d="M60 25 L105 25 L125 55 L75 55 Z"
+              fill="#9eb5b0"
+            />
+
+            <!-- Small decorative object -->
+            <ellipse
+              cx="90"
+              cy="15"
+              rx="5"
+              ry="3"
+              fill="#168f80"
+            />
+
+            <circle
+              cx="90"
+              cy="12"
+              r="3"
+              fill="#d7e2df"
+            />
+          </svg>
         </div>
-      {%- endif -%}
+
+        <!-- Empty Cart Message -->
+        <h2 class="cart__empty-text">
+          Your Cart Is Empty
+        </h2>
+
+        <!-- Continue Shopping Button -->
+        <a
+          href="{{ routes.all_products_collection_url }}"
+          class="button cart-empty-continue-button"
+        >
+          Continue Shopping
+        </a>
+
+      </div>
+
+      <!-- Close Drawer -->
+      <button
+        class="drawer__close"
+        type="button"
+        onclick="this.closest('cart-drawer').close()"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+        <span class="svg-wrapper">
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </span>
+      </button>
+
+    </div>
+  </div>
+{%- endif -%}
       <div class="drawer__header">
         <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
         <button
