@@ -48,9 +48,10 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     super.connectedCallback();
 
     this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
-      if (event.source === 'cart-items') return;
-      return this.onCartUpdate();
-    });
+  if (event.source === 'cart-items' && this.tagName === 'CART-DRAWER-ITEMS') return;
+
+  return this.onCartUpdate();
+});
   }
 
   // Fetches the full cart shape (used to resolve the cart:lines-update event

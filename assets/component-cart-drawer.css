@@ -88,7 +88,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   min-height: 4.4rem;
   box-shadow: 0 0 0 0.2rem rgba(var(--color-button), 0);
   position: absolute;
-  right: -2rem;
+  right: 0.1rem;
   color: rgb(var(--color-foreground));
   background-color: transparent;
   border: none;
